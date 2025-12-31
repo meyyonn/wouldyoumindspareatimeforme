@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I think when the PRS program I guess</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+}
+
+.content {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  text-align: center;
+}
+
+.message {
+  font-size: 18px;
+  margin-bottom: 20px;
+  min-height: 24px;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 3px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50% { opacity:0; }
+}
+
+.writing-area {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.writing-area textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: none;
+}
+
+.writing-area button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+
+
+  <div class="content">
+  <div class="message">
+    <span id="text"></span><span class="cursor">|</span>
+  </div>
+
+  <div class="writing-area">
+    <textarea
+      id="answerInput"
+      placeholder="You can write anything here..."
+    ></textarea>
+
+    <button id="sendBtn" onclick="sendAnswer()">Send</button>
+  </div>
+</div>
+
+
+<script>
+    const text = "There was a moment that made me fall for you, but I don’t exactly know when... I can barely remember it."; 
+    const textEl = document.getElementById("text");
+    const cursor = document.getElementById("cursor");
+    const nextBtn = document.getElementById("nextBtn");
+    let i = 0;
+    let dotCount = 0; // counter for dots
+
+    function typeText() {
+        if (i < text.length) {
+            const char = text.charAt(i);
+            textEl.innerHTML += char;
+            i++;
+
+            let delay = 60; // default delay
+
+            if (char === ",") delay = 400; // comma delay
+
+            if (char === ".") {
+                dotCount++;
+                if (dotCount === 3) { // third dot
+                    delay = 400;
+                }
+            }
+
+            setTimeout(typeText, delay);
+        } else {
+            cursor.style.display = "none";
+            nextBtn.style.display = "inline-block";
+        }
+    }
+
+    function goNext() {
+        window.location.href = "namamu.html";
+    }
+
+    typeText();
+</script>
+
+</body>
+</html>
+
